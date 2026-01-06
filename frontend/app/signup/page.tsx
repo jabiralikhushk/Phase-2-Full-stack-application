@@ -1,1 +1,135 @@
-'use client';\n\nimport { useState, useEffect } from 'react';\nimport { useRouter } from 'next/navigation';\nimport Link from 'next/link';\nimport Button from '@/components/ui/Button';\nimport Input from '@/components/ui/Input';\nimport Card from '@/components/ui/Card';\nimport api from '@/lib/api';\n\nconst SignupPage = () => {\n  const [formData, setFormData] = useState({\n    name: '',\n    email: '',\n    password: '',\n    confirmPassword: '',\n  });\n  const [loading, setLoading] = useState(false);\n  const [error, setError] = useState('');\n  const router = useRouter();\n\n  useEffect(() => {\n    // Redirect if already logged in\n    if (localStorage.getItem('token')) {\n      router.push('/dashboard');\n    }\n  }, [router]);\n\n  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n    setFormData({ ...formData, [e.target.name]: e.target.value });\n  };\n\n  const handleSubmit = async (e: React.FormEvent) => {\n    e.preventDefault();\n    setLoading(true);\n    setError('');\n\n    if (formData.password !== formData.confirmPassword) {\n      setError('Passwords do not match');\n      setLoading(false);\n      return;\n    }\n\n    try {\n      const res = await api.post('/api/auth/register', {\n        name: formData.name,\n        email: formData.email,\n        password: formData.password,\n      });\n      localStorage.setItem('token', res.data.token);\n      router.push('/dashboard');\n    } catch (err: any) {\n      setError(err.response?.data?.message || 'An error occurred');\n    } finally {\n      setLoading(false);\n    }\n  };\n\n  return (\n    <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>\n      <Card className='max-w-md w-full'>\n        <div className='text-center'>\n          <h2 className='text-3xl font-extrabold text-gray-900'>Create a new account</h2>\n        </div>\n        <form className='mt-8 space-y-6' onSubmit={handleSubmit}>\n          {error && (\n            <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative' role='alert'>\n              <span className='block sm:inline'>{error}</span>\n            </div>\n          )}\n          <Input\n            label='Name'\n            id='name'\n            name='name'\n            type='text'\n            placeholder='Enter your name'\n            value={formData.name}\n            onChange={handleChange}\n            required\n          />\n          <Input\n            label='Email Address'\n            id='email'\n            name='email'\n            type='email'\n            placeholder='Enter your email'\n            value={formData.email}\n            onChange={handleChange}\n            required\n          />\n          <Input\n            label='Password'\n            id='password'\n            name='password'\n            type='password'\n            placeholder='Enter your password'\n            value={formData.password}\n            onChange={handleChange}\n            required\n          />\n          <Input\n            label='Confirm Password'\n            id='confirmPassword'\n            name='confirmPassword'\n            type='password'\n            placeholder='Confirm your password'\n            value={formData.confirmPassword}\n            onChange={handleChange}\n            required\n          />\n          <div>\n            <Button\n              type='submit'\n              variant='primary'\n              className='w-full'\n              disabled={loading}\n            >\n              {loading ? 'Creating account...' : 'Sign up'}\n            </Button>\n          </div>\n        </form>\n        <div className='mt-4 text-center'>\n          <p className='text-sm text-gray-600'>\n            Already have an account?{' '}\n            <Link href='/login' className='font-medium text-blue-600 hover:text-blue-500'>\n              Sign in\n            </Link>\n          </p>\n        </div>\n      </Card>\n    </div>\n  );\n};\n\nexport default SignupPage;
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
+import Card from '@/components/ui/Card';
+import api from '@/lib/api';
+
+const SignupPage = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect if already logged in
+    if (localStorage.getItem('token')) {
+      router.push('/dashboard');
+    }
+  }, [router]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await api.post('/api/auth/register', {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+      localStorage.setItem('token', res.data.token);
+      router.push('/dashboard');
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
+      <Card className='max-w-md w-full'>
+        <div className='text-center'>
+          <h2 className='text-3xl font-extrabold text-gray-900'>Create a new account</h2>
+        </div>
+        <form className='mt-8 space-y-6' onSubmit={handleSubmit}>
+          {error && (
+            <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative' role='alert'>
+              <span className='block sm:inline'>{error}</span>
+            </div>
+          )}
+          <Input
+            label='Name'
+            id='name'
+            name='name'
+            type='text'
+            placeholder='Enter your name'
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            label='Email Address'
+            id='email'
+            name='email'
+            type='email'
+            placeholder='Enter your email'
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            label='Password'
+            id='password'
+            name='password'
+            type='password'
+            placeholder='Enter your password'
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            label='Confirm Password'
+            id='confirmPassword'
+            name='confirmPassword'
+            type='password'
+            placeholder='Confirm your password'
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+          <div>
+            <Button
+              type='submit'
+              variant='primary'
+              className='w-full'
+              disabled={loading}
+            >
+              {loading ? 'Creating account...' : 'Sign up'}
+            </Button>
+          </div>
+        </form>
+        <div className='mt-4 text-center'>
+          <p className='text-sm text-gray-600'>
+            Already have an account?{' '}
+            <Link href='/login' className='font-medium text-blue-600 hover:text-blue-500'>
+              Sign in
+            </Link>
+          </p>
+        </div>
+      </Card>
+    </div>
+  );
+};
+
+export default SignupPage;

@@ -1,8 +1,7 @@
 {
-  "/_global-error/page": "app/_global-error/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/auth/page": "app/auth/page.js",
-  "/auth/signup/page": "app/auth/signup/page.js",
+  "/_not-found": "app/_not-found.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/page": "app/page.js"
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/signup/page": "app/signup/page.js"
 }
