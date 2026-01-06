@@ -1,0 +1,22 @@
+{
+  "devFiles": [],
+  "ampDevFiles": [],
+  "polyfillFiles": [
+    "static/chunks/a2d80_next_dist_build_polyfills_polyfill-nomodule.js"
+  ],
+  "lowPriorityFiles": [],
+  "rootMainFiles": [
+    "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_760705cd._.js",
+    "static/chunks/a2d80_next_dist_compiled_react-dom_4e9ea397._.js",
+    "static/chunks/a2d80_next_dist_compiled_react-server-dom-turbopack_658ec009._.js",
+    "static/chunks/a2d80_next_dist_compiled_next-devtools_index_90cd4772.js",
+    "static/chunks/a2d80_next_dist_compiled_2a69f3c7._.js",
+    "static/chunks/a2d80_next_dist_client_6cb5a53c._.js",
+    "static/chunks/a2d80_next_dist_f7156fe9._.js",
+    "static/chunks/a2d80_@swc_helpers_cjs_e3fe9d30._.js",
+    "static/chunks/Desktop_New folder (2)_todo-app_my-bonsai-app_frontend_a0ff3932._.js",
+    "static/chunks/turbopack-Desktop_New folder (2)_todo-app_my-bonsai-app_frontend_4c8d9ed9._.js"
+  ],
+  "pages": {},
+  "ampFirstPages": []
+}

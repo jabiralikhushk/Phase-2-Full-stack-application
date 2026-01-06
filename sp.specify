@@ -1,0 +1,236 @@
+# Spec-Kit Plus Specifications
+## Project: Hackathon Todo App
+
+### 1. Project Overview
+
+#### 1.1 Purpose
+Create a full-stack todo application with mandatory authentication following the Spec Constitution. The application must implement JWT-based authentication with user data isolation.
+
+#### 1.2 Scope
+- Frontend: React-based web application with authentication
+- Backend: Node.js/Express API with JWT authentication
+- Authentication: Stateless JWT-based system
+- Database: To be determined (with user data isolation)
+- Shared: Common types, utilities, and API contracts
+
+### 2. Functional Requirements
+
+#### 2.1 User Authentication
+- User registration with email and password
+- User login with JWT token generation
+- JWT token validation for all protected endpoints
+- User logout functionality
+
+#### 2.2 Todo Management (Authenticated)
+- Create new todos (authenticated users only)
+- Read user's own todos (authenticated users only)
+- Update user's own todos (authenticated users only)
+- Delete user's own todos (authenticated users only)
+- Mark todos as complete/incomplete (authenticated users only)
+
+#### 2.3 User Interface
+- Login page
+- Registration page
+- Todo dashboard (accessible after authentication)
+- Form for creating new todos
+- Ability to edit existing todos
+- Filter todos (all, active, completed)
+- User profile/logout functionality
+
+### 3. Data Models
+
+#### 3.1 User Model
+```
+User {
+  id: string (unique identifier)
+  email: string (unique, required)
+  password: string (hashed, required)
+  createdAt: Date (auto-generated)
+  updatedAt: Date (auto-generated)
+}
+```
+
+#### 3.2 Todo Model
+```
+Todo {
+  id: string (unique identifier)
+  userId: string (foreign key to User)
+  title: string (required, max 255 chars)
+  description: string (optional, max 1000 chars)
+  completed: boolean (default: false)
+  createdAt: Date (auto-generated)
+  updatedAt: Date (auto-generated)
+}
+```
+
+### 4. Technical Specifications
+
+#### 4.1 Frontend Stack
+- React 18+ with functional components and hooks
+- Vite as build tool
+- CSS Modules or styled-components for styling
+- Axios for API communication
+- React Router for navigation
+- JWT token storage in memory/localStorage
+
+#### 4.2 Backend Stack
+- Node.js with Express framework
+- RESTful API design
+- JWT authentication middleware
+- CORS support for frontend integration
+- Environment-based configuration
+
+#### 4.3 Authentication Requirements
+- All API endpoints (except auth endpoints) require JWT
+- JWT validation middleware for protected routes
+- Password hashing using bcrypt
+- User data isolation - users can only access their own data
+
+#### 4.4 API Endpoints
+
+##### 4.4.1 Authentication Endpoints
+```
+POST   /api/auth/register      # Register new user
+POST   /api/auth/login         # Login user and return JWT
+POST   /api/auth/logout        # Logout user (optional)
+```
+
+##### 4.4.2 Todo Endpoints (JWT Required)
+```
+GET    /api/todos              # Get user's todos
+POST   /api/todos              # Create a new todo for user
+PUT    /api/todos/:id          # Update a user's todo
+DELETE /api/todos/:id          # Delete a user's todo
+```
+
+##### 4.4.3 Response Format
+```
+Success Response:
+{
+  "success": true,
+  "data": { ... }  // or array for collections
+}
+
+Error Response:
+{
+  "success": false,
+  "error": "Error message"
+}
+
+Auth Success Response:
+{
+  "success": true,
+  "data": {
+    "user": { ... },
+    "token": "jwt_token_here"
+  }
+}
+```
+
+#### 4.5 Frontend Components
+- App: Main application component with auth routing
+- AuthPage: Login/Registration component
+- TodoDashboard: Main dashboard after authentication
+- TodoList: Displays user's todos
+- TodoItem: Individual todo component with checkbox and actions
+- TodoForm: Form for creating and editing todos
+- FilterControls: Component for filtering todos
+- UserProfile: User profile and logout component
+
+### 5. Security Specifications
+
+#### 5.1 JWT Implementation
+- Use 'jsonwebtoken' library for JWT handling
+- Token expiration: 24 hours (configurable)
+- Token refresh mechanism (optional)
+- Secure token storage and transmission
+
+#### 5.2 Password Security
+- Use 'bcrypt' for password hashing
+- Minimum password strength requirements
+- Never store plain text passwords
+
+#### 5.3 Data Isolation
+- All todo operations must be filtered by userId
+- Users cannot access other users' data
+- Backend validation to enforce data isolation
+
+### 6. Non-Functional Requirements
+
+#### 6.1 Performance
+- Page load time < 3 seconds
+- API response time < 1 second
+- JWT validation < 50ms
+
+#### 6.2 Security
+- All API endpoints (except auth) require valid JWT
+- User data isolation is mandatory
+- Passwords must be properly hashed
+- No sensitive data in client-side storage without encryption
+
+#### 6.3 Usability
+- Intuitive authentication flow
+- Clear error messages for auth failures
+- Mobile-responsive design
+
+### 7. Architecture
+
+#### 7.1 Frontend Architecture
+```
+src/
+├── components/     # Reusable UI components
+├── pages/         # Page-level components (Auth, Dashboard)
+├── hooks/         # Custom React hooks (auth, todos)
+├── services/      # API communication logic with auth
+├── types/         # TypeScript type definitions
+├── utils/         # Utility functions
+├── context/       # Authentication context
+├── App.jsx        # Main application component with routing
+└── main.jsx       # Entry point
+```
+
+#### 7.2 Backend Architecture
+```
+server.js              # Main server file
+├── middleware/        # JWT auth middleware, error handling
+├── routes/            # API route definitions (auth, todos)
+├── models/            # User and Todo models (when implemented)
+├── controllers/       # Request handlers
+├── utils/             # Utility functions (password hashing, etc.)
+└── config/            # Configuration files (JWT, database)
+```
+
+#### 7.3 Shared Package
+```
+shared/
+├── types.ts       # Shared TypeScript types (User, Todo, API responses)
+├── constants.ts   # Shared constants (API endpoints, auth constants)
+├── utils.ts       # Shared utility functions
+└── index.ts       # Export all shared items
+```
+
+### 8. Environment Configuration
+
+#### 8.1 Frontend Environment Variables
+- VITE_API_URL: Base URL for API calls (default: http://localhost:4000)
+
+#### 8.2 Backend Environment Variables
+- PORT: Server port (default: 4000)
+- NODE_ENV: Environment mode (development/production)
+- JWT_SECRET: Secret key for JWT signing
+- DATABASE_URL: Database connection string (when implemented)
+
+### 9. Testing Strategy
+
+#### 9.1 Frontend Testing
+- Unit tests for React components using Jest and React Testing Library
+- Authentication flow testing
+- Integration tests for component interactions
+- Mock API responses for testing
+
+#### 9.2 Backend Testing
+- Unit tests for API endpoints using Jest and Supertest
+- Authentication middleware testing
+- JWT validation testing
+- User data isolation testing
+- Integration tests for data flow

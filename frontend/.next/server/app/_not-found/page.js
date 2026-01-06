@@ -1,0 +1,13 @@
+var R=require("../../chunks/ssr/[turbopack]_runtime.js")("server/app/_not-found/page.js")
+R.c("server/chunks/ssr/Desktop_New folder (2)_todo-app_my-bonsai-app_frontend_1dfc2c48._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__38c14007._.js")
+R.c("server/chunks/ssr/a2d80_next_dist_esm_build_templates_app-page_0e84bc08.js")
+R.c("server/chunks/ssr/[root-of-the-server]__f2957c86._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__b1b8e548._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__37a70eb3._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__b032e7cf._.js")
+R.c("server/chunks/ssr/a2d80_next_dist_client_components_6286ec70._.js")
+R.c("server/chunks/ssr/a2d80_next_dist_client_components_builtin_forbidden_b44e9ad9.js")
+R.c("server/chunks/ssr/d0a38_frontend__next-internal_server_app__not-found_page_actions_82597dfb.js")
+R.m(68676)
+module.exports=R.m(68676).exports

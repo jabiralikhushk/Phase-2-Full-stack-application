@@ -1,0 +1,20 @@
+{
+  "name": "my-bonsai-app",
+  "version": "1.0.0",
+  "description": "A modern full-stack web application with Next.js, TypeScript, and MongoDB",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && nodemon server.js",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "start": "node backend/server.js",
+    "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install"
+  },
+  "keywords": ["nextjs", "mongodb", "typescript", "tailwindcss"],
+  "author": "Full Stack Developer",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

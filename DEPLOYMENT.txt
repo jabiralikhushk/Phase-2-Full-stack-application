@@ -1,0 +1,29 @@
+# Deployment Guide for Bonsai App 
+  
+To deploy this application, follow these steps:  
+  
+1. BACKEND DEPLOYMENT:  
+   - Deploy the backend folder to a Node.js hosting platform like Render, Railway, or Heroku  
+   - Set environment variables:  
+     * MONGODB_URI: Your MongoDB connection string  
+     * JWT_SECRET: Your JWT secret key  
+     * NODE_ENV: production  
+     * PORT: 5000 (or your platform's default)  
+  
+2. FRONTEND DEPLOYMENT:  
+   - Deploy the frontend folder to a static hosting platform like Vercel, Netlify, or Surge  
+   - Set environment variable:  
+     * NEXT_PUBLIC_API_URL: The URL of your deployed backend (e.g., https://your-app.onrender.com)  
+  
+3. BUILD THE APPLICATION:  
+   - For frontend: Run `npm run build` in the frontend directory  
+   - Most platforms will build automatically when you deploy  
+  
+4. DATABASE SETUP:  
+   - Use MongoDB Atlas for production database  
+   - Create a cluster and get the connection string  
+  
+5. SECURITY:  
+   - Change JWT_SECRET to a strong, random value in production  
+   - Enable HTTPS on both frontend and backend  
+   - Add proper CORS configuration for your production domains 

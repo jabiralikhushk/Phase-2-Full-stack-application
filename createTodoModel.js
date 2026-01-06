@@ -1,0 +1,3 @@
+const fs = require('fs');  
+const content = "const mongoose = require('mongoose');\\n\\nconst todoSchema = new mongoose.Schema({\\n  title: {\\n    type: String,\\n    required: true,\\n    trim: true\\n  },\\n  description: {\\n    type: String,\\n    required: false,\\n    trim: true\\n  },\\n  completed: {\\n    type: Boolean,\\n    default: false\\n  },\\n  user: {\\n    type: mongoose.Schema.Types.ObjectId,\\n    ref: 'User',\\n    required: true\\n  }\\n}, {\\n  timestamps: true\\n});\\n\\nmodule.exports = mongoose.model('Todo', todoSchema);"  
+fs.writeFileSync('backend/models/Todo.js', content) 

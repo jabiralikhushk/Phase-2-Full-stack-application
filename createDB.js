@@ -1,0 +1,3 @@
+const fs = require('fs');  
+const content = "const mongoose = require('mongoose');\\n\\nconst connectDB = async () => {\\n  try {\\n    const conn = await mongoose.connect(process.env.MONGODB_URI, {\\n      useNewUrlParser: true,\\n      useUnifiedTopology: true\\n    });\\n    \\n    console.log('MongoDB Connected: ' + conn.connection.host);\\n  } catch (error) {\\n    console.error('Error: ' + error.message);\\n    process.exit(1);\\n  }\\n};\\n\\nmodule.exports = connectDB;"  
+fs.writeFileSync('backend/config/database.js', content) 

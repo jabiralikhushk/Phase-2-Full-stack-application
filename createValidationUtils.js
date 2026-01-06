@@ -1,0 +1,3 @@
+const fs = require('fs');  
+const content = "// Validation utilities\\n\\nexport const validateEmail = (email: string): boolean => {\\n  const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/;\\n  return re.test(email);\\n};\\n\\nexport const validatePassword = (password: string): boolean => {\\n  // At least 6 characters\\n  return password.length >= 6;\\n};\\n\\nexport const validateName = (name: string): boolean => {\\n  // At least 2 characters\\n  return name.length >= 2;\\n};\\n\\nexport const validateTodo = (title: string): boolean => {\\n  // Title is required and at least 1 character\\n  return title.trim().length > 0;\\n};"  
+fs.writeFileSync('frontend/lib/utils.ts', content) 

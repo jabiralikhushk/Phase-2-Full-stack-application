@@ -1,0 +1,26 @@
+# Deployment Instructions for Production  
+  
+## Deploying the Full Application  
+  
+1. BACKEND DEPLOYMENT:  
+   - Deploy the 'backend' folder to a Node.js hosting platform  
+   - Recommended: Render.com, Railway.app, or Heroku  
+   - Environment Variables Required:  
+     * MONGODB_URI: MongoDB Atlas connection string  
+     * JWT_SECRET: Strong secret key for JWT tokens  
+     * NODE_ENV: production  
+     * PORT: 5000  
+  
+2. FRONTEND DEPLOYMENT:  
+   - Deploy the 'frontend' folder to a static hosting platform  
+   - Recommended: Vercel.com, Netlify.com, or Surge.sh  
+   - Environment Variable Required:  
+     * NEXT_PUBLIC_API_URL: URL of your deployed backend  
+  
+3. DATABASE SETUP:  
+   - Use MongoDB Atlas for production database  
+   - Create a cluster and get the connection string  
+  
+4. BUILD COMMANDS:  
+   - Frontend: npm run build (in frontend directory)  
+   - Backend: npm start (in backend directory) 

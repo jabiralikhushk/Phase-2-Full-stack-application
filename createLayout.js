@@ -1,0 +1,3 @@
+const fs = require('fs');  
+const content = "import './globals.css';\\n\\nexport const metadata = {\\n  title: 'Bonsai App',\\n  description: 'A modern full-stack todo application',\\n};\\n\\nexport default function RootLayout({ children }) {\\n  return (\\n    <html lang='en'>\\n      <body className='antialiased'>{children}</body>\\n    </html>\\n  );\\n}"  
+fs.writeFileSync('frontend/app/layout.tsx', content) 

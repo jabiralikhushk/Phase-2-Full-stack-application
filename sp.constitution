@@ -1,0 +1,32 @@
+# Spec Constitution – Hackathon Todo App
+
+## Authority
+This project is governed strictly by Spec-Kit Plus.
+Claude Code must follow all specs exactly.
+
+## Non-Negotiable Rules
+- No manual coding by human
+- No features beyond written specs
+- No deviation from API contracts
+- No skipping authentication
+- No mixing phases
+
+## Architecture Principles
+- Monorepo architecture
+- Frontend and backend separated
+- Spec-driven development only
+- Stateless backend authentication using JWT
+
+## Security Rules
+- All APIs require JWT
+- User data isolation is mandatory
+- Never expose secrets
+- Use environment variables only
+
+## Quality Standards
+- Code must be runnable
+- Minimal but complete implementation
+- Explicit error handling
+- REST conventions required
+
+Breaking any rule invalidates the task.
